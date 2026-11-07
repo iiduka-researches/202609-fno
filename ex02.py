@@ -29,6 +29,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--n_modes', type=int, default=16)
     parser.add_argument('-d', '--results_dir', type=str, default='results')
     parser.add_argument('-N', '--num_models', type=int, default=100)
+    parser.add_argument('-L', '--n_layers', type=int, default=4)
     args = parser.parse_args()
 
     min_n = args.min_n
@@ -36,6 +37,7 @@ if __name__ == '__main__':
     n_modes = args.n_modes
     results_dir = args.results_dir
     num_models = args.num_models
+    n_layers = args.n_layers
 
     device = torch.device(
         'cuda' if torch.cuda.is_available() else 'cpu'
@@ -44,7 +46,7 @@ if __name__ == '__main__':
 
     wave = generate_wave(2 ** max_n).to(device)
 
-    for t in range(4):
+    for t in range(n_layers):
         df = pd.DataFrame(
             index=range(num_models),
             columns=range(min_n, max_n),
