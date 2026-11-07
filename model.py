@@ -61,7 +61,7 @@ class FNO1d(nn.Module):
         self.width = width
         self.n_layers = n_layers
   
-        self.fc0 = nn.Linear(2, self.width) # input channel is 2: (a(x), x)
+        self.fc0 = nn.Linear(1, self.width)
         # Fourier blocks
         self.conv_layers = nn.ModuleList([
             SpectralConv1d(width, width, modes) for _ in range(n_layers)
